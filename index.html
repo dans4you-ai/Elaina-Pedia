@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elaina Pedia - SSM Panel Termurah</title>
+    <style>
+        :root {
+            --primary: #6c63ff;
+            --secondary: #4a44c9;
+            --accent: #ff6584;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --gray: #6c757d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fb;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+        .logo-icon {
+            font-size: 32px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(rgba(108, 99, 255, 0.05), rgba(74, 68, 201, 0.05));
+        }
+        
+        .hero h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: var(--gray);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 14px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 101, 132, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 101, 132, 0.4);
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .service-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .category {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .service-list {
+            list-style: none;
+        }
+        
+        .service-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .service-item:last-child {
+            border-bottom: none;
+        }
+        
+        .service-name {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .service-price {
+            font-weight: 600;
+            color: var(--success);
+        }
+        
+        /* Order Form */
+        .order-form {
+            background-color: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+            outline: none;
+        }
+        
+        .price-display {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--success);
+            margin-bottom: 25px;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-column a:hover {
+            color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            .hero h2 {
+                font-size: 32px;
+            }
+            
+            .order-form {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">✨</div>
+                    <h1>Elaina Pedia</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Beranda</a></li>
+                        <li><a href="#services">Layanan</a></li>
+                        <li><a href="#order">Pesan</a></li>
+                        <li><a href="#contact">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>SSM Panel Termurah & Terpercaya</h2>
+            <p>Tingkatkan popularitas media sosial Anda dengan layanan berkualitas tinggi dan harga terjangkau. Proses cepat, aman, dan terjamin!</p>
+            <a href="#order" class="cta-button">Pesan Sekarang</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Layanan Kami</h2>
+                <p>Kami menyediakan berbagai layanan untuk meningkatkan performa media sosial Anda</p>
+            </div>
+            
+            <div class="service-categories">
+                <!-- Followers -->
+                <div class="category">
+                    <h3>📈 Followers</h3>
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <div class="service-name">
+                                <span>TikTok</span>
+                            </div>
+                            <div class="service-price">Rp17.000/1K</div>
+                        </li>
+                        <li class="service-item">
+                            <div class="service-name">
+                                <span>Instagram</span>
+                            </div>
+                            <div class="service-price">Rp17.000/1K</div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Likes -->
+                <div class="category">
+                    <h3>👍 Likes</h3>
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <div class="service-name">
+                                <span>TikTok</span>
+                            </div>
+                            <div class="service-price">Rp500/1K</div>
+                        </li>
+                        <li class="service-item">
+                            <div class="service-name">
+                                <span>Instagram</span>
+                            </div>
+                            <div class="service-price">Rp2.000/1K</div>
+                        </li>
+                        <li class="service-item">
+                            <div class="service-name">
+                                <span>YouTube</span>
+                            </div>
+                            <div class="service-price">Rp2.000/1K</div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Views -->
+                <div class="category">
+                    <h3>👁️ Views</h3>
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <div class="service-name">
+                                <span>TikTok</span>
+                            </div>
+                            <div class="service-price">Rp500/1K</div>
+                        </li>
+                        <li class="service-item">
+                            <div class="service-name">
+                                <span>Instagram</span>
+                            </div>
+                            <div class="service-price">Rp100/1K</div>
+                        </li>
+                        <li class="service-item">
+                            <div class="service-name">
+                                <span>YouTube</span>
+                            </div>
+                            <div class="service-price">Rp15.000/1K</div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Other Services -->
+                <div class="category">
+                    <h3>🔗 Lainnya</h3>
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <div class="service-name">
+                                <span>Pengikut WhatsApp</span>
+                            </div>
+                            <div class="service-price">Rp30.000/1K</div>
+                        </li>
+                        <li class="service-item">
+                            <div class="service-name">
+                                <span>Subscribe YouTube</span>
+                            </div>
+                            <div class="service-price">Rp270.000/1K</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Form -->
+    <section class="order-form-section" id="order">
+        <div class="container">
+            <div class="section-title">
+                <h2>Form Pemesanan</h2>
+                <p>Isi form berikut untuk memesan layanan yang Anda butuhkan</p>
+            </div>
+            
+            <div class="order-form">
+                <form id="orderForm">
+                    <div class="form-group">
+                        <label for="sosmed">SOSMED</label>
+                        <select id="sosmed" class="form-control" required>
+                            <option value="" disabled selected>Pilih Media Sosial</option>
+                            <option value="INSTAGRAM">Instagram</option>
+                            <option value="TIKTOK">TikTok</option>
+                            <option value="YOUTUBE">YouTube</option>
+                            <option value="WHATSAPP">WhatsApp</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="type">TYPE</label>
+                        <select id="type" class="form-control" required>
+                            <option value="" disabled selected>Pilih Jenis Layanan</option>
+                            <option value="FOLLOWERS">Followers</option>
+                            <option value="LIKE">Like</option>
+                            <option value="VIEWS">Views</option>
+                            <option value="PENGIKUT">Pengikut (WhatsApp)</option>
+                            <option value="SUBSCRIBE">Subscribe (YouTube)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="jumlah">JUMLAH</label>
+                        <input type="number" id="jumlah" class="form-control" placeholder="Masukkan jumlah" min="1" required>
+                    </div>
+                    
+                    <div class="price-display" id="priceDisplay">
+                        HARGA: Rp0
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="link">LINK TARGET</label>
+                        <input type="url" id="link" class="form-control" placeholder="Masukkan link media sosial Anda" required>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Pesan Sekarang</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Elaina Pedia</h3>
+                    <p>SSM Panel termurah dan terpercaya untuk meningkatkan performa media sosial Anda.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Layanan</h3>
+                    <ul>
+                        <li><a href="#">Followers</a></li>
+                        <li><a href="#">Likes</a></li>
+                        <li><a href="#">Views</a></li>
+                        <li><a href="#">Subscribers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak</h3>
+                    <ul>
+                        <li><a href="https://wa.me/6283876048457">WhatsApp: 6283876048457</a></li>
+                        <li><a href="mailto:info@elainapedia.com">Email: info@elainapedia.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 Elaina Pedia. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Harga per layanan
+        const prices = {
+            "INSTAGRAM": {
+                "FOLLOWERS": 25000,
+                "LIKE": 2000,
+                "VIEWS": 500
+            },
+            "TIKTOK": {
+                "FOLLOWERS": 17000,
+                "LIKE": 500,
+                "VIEWS": 500
+            },
+            "YOUTUBE": {
+                "LIKE": 2000,
+                "VIEWS": 100,
+                "SUBSCRIBE": 270000
+            },
+            "WHATSAPP": {
+                "PENGIKUT": 30000
+            }
+        };
+
+        // Minimal order
+        const minOrders = {
+            "INSTAGRAM": {
+                "VIEWS": 10000
+            },
+            "TIKTOK": {
+                "VIEWS": 2000
+            }
+        };
+
+        // Elemen form
+        const sosmedSelect = document.getElementById('sosmed');
+        const typeSelect = document.getElementById('type');
+        const jumlahInput = document.getElementById('jumlah');
+        const priceDisplay = document.getElementById('priceDisplay');
+        const orderForm = document.getElementById('orderForm');
+
+        // Update opsi type berdasarkan sosmed yang dipilih
+        sosmedSelect.addEventListener('change', function() {
+            const selectedSosmed = this.value;
+            
+            // Reset type select
+            typeSelect.innerHTML = '<option value="" disabled selected>Pilih Jenis Layanan</option>';
+            
+            // Tambahkan opsi berdasarkan sosmed yang dipilih
+            if (selectedSosmed === 'INSTAGRAM') {
+                typeSelect.innerHTML += `
+                    <option value="FOLLOWERS">Followers</option>
+                    <option value="LIKE">Like</option>
+                    <option value="VIEWS">Views</option>
+                `;
+            } else if (selectedSosmed === 'TIKTOK') {
+                typeSelect.innerHTML += `
+                    <option value="FOLLOWERS">Followers</option>
+                    <option value="LIKE">Like</option>
+                    <option value="VIEWS">Views</option>
+                `;
+            } else if (selectedSosmed === 'YOUTUBE') {
+                typeSelect.innerHTML += `
+                    <option value="LIKE">Like</option>
+                    <option value="VIEWS">Views</option>
+                    <option value="SUBSCRIBE">Subscribe</option>
+                `;
+            } else if (selectedSosmed === 'WHATSAPP') {
+                typeSelect.innerHTML += `
+                    <option value="PENGIKUT">Pengikut</option>
+                `;
+            }
+            
+            // Reset harga
+            priceDisplay.textContent = 'HARGA: Rp0';
+        });
+
+        // Hitung harga saat jumlah berubah
+        jumlahInput.addEventListener('input', calculatePrice);
+        typeSelect.addEventListener('change', calculatePrice);
+
+        function calculatePrice() {
+            const sosmed = sosmedSelect.value;
+            const type = typeSelect.value;
+            const jumlah = parseInt(jumlahInput.value) || 0;
+            
+            if (sosmed && type && jumlah > 0) {
+                // Cek minimal order
+                let minOrder = 0;
+                if (minOrders[sosmed] && minOrders[sosmed][type]) {
+                    minOrder = minOrders[sosmed][type];
+                }
+                
+                if (jumlah < minOrder) {
+                    priceDisplay.textContent = `Minimal order: ${minOrder.toLocaleString()}`;
+                    priceDisplay.style.color = 'var(--danger)';
+                    return;
+                }
+                
+                // Hitung harga
+                const pricePerK = prices[sosmed][type];
+                const totalPrice = Math.round((pricePerK * jumlah) / 1000);
+                
+                priceDisplay.textContent = `HARGA: Rp${totalPrice.toLocaleString()}`;
+                priceDisplay.style.color = 'var(--success)';
+            } else {
+                priceDisplay.textContent = 'HARGA: Rp0';
+                priceDisplay.style.color = 'var(--success)';
+            }
+        }
+
+        // Kirim pesan ke WhatsApp
+        orderForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const sosmed = sosmedSelect.value;
+            const type = typeSelect.value;
+            const jumlah = jumlahInput.value;
+            const link = document.getElementById('link').value;
+            
+            // Hitung harga
+            const pricePerK = prices[sosmed][type];
+            const totalPrice = Math.round((pricePerK * jumlah) / 1000);
+            
+            // Format pesan
+            const message = `*PESANAN SUNTIK SOSMED*%0A*SOSMED* = ${sosmed}%0A*TYPE* = ${type}%0A*JUMLAH* = ${jumlah}%0A*HARGA* = Rp${totalPrice.toLocaleString()}%0A*LINK TARGET* = ${link}`;
+            
+            // Redirect ke WhatsApp
+            window.open(`https://wa.me/6283876048457?text=${message}`, '_blank');
+        });
+    </script>
+</body>
+</html>
