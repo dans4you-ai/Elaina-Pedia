@@ -248,43 +248,6 @@
             margin-bottom: 25px;
         }
         
-        .payment-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 10px;
-            margin-bottom: 25px;
-        }
-        
-        .payment-option {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 10px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .payment-option:hover {
-            border-color: var(--primary);
-        }
-        
-        .payment-option.selected {
-            border-color: var(--primary);
-            background-color: rgba(108, 99, 255, 0.05);
-        }
-        
-        .payment-icon {
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
-        
-        .payment-name {
-            font-size: 14px;
-            font-weight: 500;
-        }
-        
         .submit-btn {
             background-color: var(--primary);
             color: white;
@@ -365,10 +328,6 @@
             
             .order-form {
                 padding: 25px;
-            }
-            
-            .payment-options {
-                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
@@ -552,30 +511,15 @@
                     
                     <!-- Payment Options -->
                     <div class="form-group">
-                        <label>METODE PEMBAYARAN</label>
-                        <div class="payment-options" id="paymentOptions">
-                            <div class="payment-option" data-value="DANA">
-                                <div class="payment-icon">💜</div>
-                                <div class="payment-name">Dana</div>
-                            </div>
-                            <div class="payment-option" data-value="GOPAY">
-                                <div class="payment-icon">💚</div>
-                                <div class="payment-name">Gopay</div>
-                            </div>
-                            <div class="payment-option" data-value="SHOPEEPAY">
-                                <div class="payment-icon">🧡</div>
-                                <div class="payment-name">Shopeepay</div>
-                            </div>
-                            <div class="payment-option" data-value="SEABANK">
-                                <div class="payment-icon">💙</div>
-                                <div class="payment-name">Seabank</div>
-                            </div>
-                            <div class="payment-option" data-value="QRIS">
-                                <div class="payment-icon">💛</div>
-                                <div class="payment-name">QRIS</div>
-                            </div>
-                        </div>
-                        <input type="hidden" id="paymentMethod" required>
+                        <label for="payment">METODE PEMBAYARAN</label>
+                        <select id="payment" class="form-control" required>
+                            <option value="" disabled selected>Pilih Metode Pembayaran</option>
+                            <option value="DANA">Dana</option>
+                            <option value="GOPAY">Gopay</option>
+                            <option value="SHOPEEPAY">Shopeepay</option>
+                            <option value="SEABANK">Seabank</option>
+                            <option value="QRIS">QRIS</option>
+                        </select>
                     </div>
                     
                     <button type="submit" class="submit-btn">Pesan Sekarang</button>
@@ -656,9 +600,8 @@
         const typeSelect = document.getElementById('type');
         const jumlahInput = document.getElementById('jumlah');
         const priceDisplay = document.getElementById('priceDisplay');
+        const paymentSelect = document.getElementById('payment');
         const orderForm = document.getElementById('orderForm');
-        const paymentOptions = document.querySelectorAll('.payment-option');
-        const paymentMethodInput = document.getElementById('paymentMethod');
 
         // Update opsi type berdasarkan sosmed yang dipilih
         sosmedSelect.addEventListener('change', function() {
@@ -694,20 +637,6 @@
             
             // Reset harga
             priceDisplay.textContent = 'HARGA: Rp0';
-        });
-
-        // Pilih metode pembayaran
-        paymentOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                // Hapus kelas selected dari semua opsi
-                paymentOptions.forEach(opt => opt.classList.remove('selected'));
-                
-                // Tambahkan kelas selected ke opsi yang dipilih
-                this.classList.add('selected');
-                
-                // Set nilai input tersembunyi
-                paymentMethodInput.value = this.getAttribute('data-value');
-            });
         });
 
         // Hitung harga saat jumlah berubah
@@ -752,7 +681,7 @@
             const type = typeSelect.value;
             const jumlah = jumlahInput.value;
             const link = document.getElementById('link').value;
-            const paymentMethod = paymentMethodInput.value;
+            const paymentMethod = paymentSelect.value;
             
             // Validasi metode pembayaran
             if (!paymentMethod) {
@@ -772,4 +701,4 @@
         });
     </script>
 </body>
-    </html>
+</html>
