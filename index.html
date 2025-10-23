@@ -15,6 +15,21 @@
             --warning: #ffc107;
             --danger: #dc3545;
             --gray: #6c757d;
+            --bg-color: #f5f7fb;
+            --text-color: #343a40;
+            --card-bg: white;
+            --border-color: #ddd;
+            --shadow: rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a1a2e;
+            --text-color: #e6e6e6;
+            --card-bg: #16213e;
+            --border-color: #2d3748;
+            --shadow: rgba(0, 0, 0, 0.2);
+            --light: #2d3748;
+            --gray: #a0aec0;
         }
         
         * {
@@ -22,11 +37,12 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
         
         body {
-            background-color: #f5f7fb;
-            color: var(--dark);
+            background-color: var(--bg-color);
+            color: var(--text-color);
             line-height: 1.6;
         }
         
@@ -42,7 +58,8 @@
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             padding: 20px 0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px var(--shadow);
+            position: relative;
         }
         
         .header-content {
@@ -70,6 +87,7 @@
             display: flex;
             list-style: none;
             gap: 25px;
+            align-items: center;
         }
         
         nav a {
@@ -83,6 +101,27 @@
         
         nav a:hover {
             background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: white;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
         }
         
         /* Hero Section */
@@ -153,16 +192,17 @@
         }
         
         .category {
-            background-color: white;
+            background-color: var(--card-bg);
             border-radius: 12px;
             padding: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 15px var(--shadow);
             transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
         }
         
         .category:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 25px var(--shadow);
         }
         
         .category h3 {
@@ -180,7 +220,7 @@
         
         .service-item {
             padding: 12px 0;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -203,12 +243,13 @@
         
         /* Order Form */
         .order-form {
-            background-color: white;
+            background-color: var(--card-bg);
             border-radius: 12px;
             padding: 40px;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 5px 25px var(--shadow);
             max-width: 800px;
             margin: 0 auto;
+            border: 1px solid var(--border-color);
         }
         
         .form-group {
@@ -219,16 +260,18 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            color: var(--dark);
+            color: var(--text-color);
         }
         
         .form-control {
             width: 100%;
             padding: 12px 15px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             font-size: 16px;
             transition: all 0.3s ease;
+            background-color: var(--card-bg);
+            color: var(--text-color);
         }
         
         .form-control:focus {
@@ -238,7 +281,7 @@
         }
         
         .price-display {
-            background-color: #f8f9fa;
+            background-color: var(--light);
             padding: 15px;
             border-radius: 8px;
             text-align: center;
@@ -347,6 +390,11 @@
                         <li><a href="#services">Layanan</a></li>
                         <li><a href="#order">Pesan</a></li>
                         <li><a href="#contact">Kontak</a></li>
+                        <li>
+                            <button class="theme-toggle" id="themeToggle" title="Toggle tema">
+                                🌙
+                            </button>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -563,17 +611,41 @@
     </footer>
 
     <script>
+        // Toggle tema gelap/terang
+        const themeToggle = document.getElementById('themeToggle');
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        
+        // Set tema awal
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        updateToggleButton(currentTheme);
+        
+        // Toggle tema saat tombol diklik
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateToggleButton(newTheme);
+        });
+        
+        // Update ikon tombol tema
+        function updateToggleButton(theme) {
+            themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
+            themeToggle.title = `Ubah ke tema ${theme === 'light' ? 'gelap' : 'terang'}`;
+        }
+
         // Harga per layanan (per 1000 unit)
         const prices = {
             "INSTAGRAM": {
                 "FOLLOWERS": 25000,
                 "LIKE": 2000,
-                "VIEWS": 100
+                "VIEWS": 1000
             },
             "TIKTOK": {
                 "FOLLOWERS": 17000,
-                "LIKE": 500,
-                "VIEWS": 500
+                "LIKE": 1000,
+                "VIEWS": 1000
             },
             "YOUTUBE": {
                 "LIKE": 2000,
