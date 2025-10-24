@@ -83,16 +83,11 @@
             font-size: 32px;
         }
         
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        
         nav ul {
             display: flex;
             list-style: none;
             gap: 25px;
+            align-items: center;
         }
         
         nav a {
@@ -108,49 +103,25 @@
             background-color: rgba(255, 255, 255, 0.1);
         }
         
-        /* Modern Theme Toggle Button */
-        .theme-toggle-container {
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-        
-        .theme-toggle {
-            position: relative;
-            width: 60px;
-            height: 30px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50px;
+            justify-content: center;
             cursor: pointer;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-size: 18px;
             transition: all 0.3s ease;
         }
         
         .theme-toggle:hover {
-            border-color: rgba(255, 255, 255, 0.5);
-        }
-        
-        .theme-toggle::before {
-            content: '';
-            position: absolute;
-            top: 3px;
-            left: 3px;
-            width: 20px;
-            height: 20px;
-            background: white;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        
-        [data-theme="dark"] .theme-toggle::before {
-            transform: translateX(30px);
-            background: #ffd700;
-        }
-        
-        .theme-icon {
-            font-size: 18px;
-            color: white;
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
         }
         
         /* Hero Section */
@@ -390,11 +361,6 @@
                 gap: 20px;
             }
             
-            .header-right {
-                width: 100%;
-                justify-content: space-between;
-            }
-            
             nav ul {
                 gap: 15px;
             }
@@ -405,10 +371,6 @@
             
             .order-form {
                 padding: 25px;
-            }
-            
-            .theme-toggle-container {
-                margin-left: auto;
             }
         }
     </style>
@@ -422,21 +384,19 @@
                     <div class="logo-icon">✨</div>
                     <h1>Elaina Pedia</h1>
                 </div>
-                <div class="header-right">
-                    <nav>
-                        <ul>
-                            <li><a href="#home">Beranda</a></li>
-                            <li><a href="#services">Layanan</a></li>
-                            <li><a href="#order">Pesan</a></li>
-                            <li><a href="#contact">Kontak</a></li>
-                        </ul>
-                    </nav>
-                    <div class="theme-toggle-container">
-                        <div class="theme-icon">☀️</div>
-                        <div class="theme-toggle" id="themeToggle" title="Toggle tema"></div>
-                        <div class="theme-icon">🌙</div>
-                    </div>
-                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Beranda</a></li>
+                        <li><a href="#services">Layanan</a></li>
+                        <li><a href="#order">Pesan</a></li>
+                        <li><a href="#contact">Kontak</a></li>
+                        <li>
+                            <button class="theme-toggle" id="themeToggle" title="Toggle tema">
+                                🌙
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </header>
@@ -657,6 +617,7 @@
         
         // Set tema awal
         document.documentElement.setAttribute('data-theme', currentTheme);
+        updateToggleButton(currentTheme);
         
         // Toggle tema saat tombol diklik
         themeToggle.addEventListener('click', () => {
@@ -665,7 +626,14 @@
             
             document.documentElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
+            updateToggleButton(newTheme);
         });
+        
+        // Update ikon tombol tema
+        function updateToggleButton(theme) {
+            themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
+            themeToggle.title = `Ubah ke tema ${theme === 'light' ? 'gelap' : 'terang'}`;
+        }
 
         // Harga per layanan (per 1000 unit)
         const prices = {
@@ -695,7 +663,7 @@
                 "VIEWS": 10000
             },
             "TIKTOK": {
-                "LIKE" : 2000,
+                "LIKE": 2000,
                 "VIEWS": 2000
             }
         };
