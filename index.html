@@ -433,7 +433,7 @@
                             <div class="service-name">
                                 <span>Instagram</span>
                             </div>
-                            <div class="service-price">Rp25.000/1K</div>
+                            <div class="service-price">Rp17.000/1K</div>
                         </li>
                     </ul>
                 </div>
@@ -546,6 +546,7 @@
                     <div class="form-group">
                         <label for="jumlah">JUMLAH</label>
                         <input type="number" id="jumlah" class="form-control" placeholder="Masukkan jumlah" min="1" required>
+                        <small id="minOrderInfo" style="color: var(--gray); margin-top: 5px; display: block;"></small>
                     </div>
                     
                     <div class="price-display" id="priceDisplay">
@@ -638,7 +639,7 @@
         // Harga per layanan (per 1000 unit)
         const prices = {
             "INSTAGRAM": {
-                "FOLLOWERS": 25000,
+                "FOLLOWERS": 17000,
                 "LIKE": 2000,
                 "VIEWS": 100
             },
@@ -657,25 +658,25 @@
             }
         };
 
-        // Minimal order
+        // Minimal order sesuai permintaan
         const minOrders = {
             "INSTAGRAM": {
-                "FOLLOWERS": 100,
-                "LIKE" : 500,
+                "FOLLOWERS": 50,
+                "LIKE": 500,
                 "VIEWS": 10000
             },
             "TIKTOK": {
-                "FOLLOWERS":100,
+                "FOLLOWERS": 500,
                 "LIKE": 2000,
                 "VIEWS": 2000
             },
             "YOUTUBE": {
                 "LIKE": 500,
-                "VIEWS: 100,
-                "SUBSCRIBE": 50
+                "VIEWS": 50,
+                "SUBSCRIBE": 10
             },
-            "WHATSAPP" {
-                "PENGIKUT": 100
+            "WHATSAPP": {
+                "PENGIKUT": 50
             }
         };
 
@@ -686,6 +687,7 @@
         const priceDisplay = document.getElementById('priceDisplay');
         const paymentSelect = document.getElementById('payment');
         const orderForm = document.getElementById('orderForm');
+        const minOrderInfo = document.getElementById('minOrderInfo');
 
         // Update opsi type berdasarkan sosmed yang dipilih
         sosmedSelect.addEventListener('change', function() {
@@ -719,13 +721,32 @@
                 `;
             }
             
-            // Reset harga
+            // Reset harga dan info minimal order
             priceDisplay.textContent = 'HARGA: Rp0';
+            minOrderInfo.textContent = '';
         });
+
+        // Update info minimal order saat type berubah
+        typeSelect.addEventListener('change', function() {
+            updateMinOrderInfo();
+            calculatePrice();
+        });
+
+        // Update info minimal order
+        function updateMinOrderInfo() {
+            const sosmed = sosmedSelect.value;
+            const type = typeSelect.value;
+            
+            if (sosmed && type && minOrders[sosmed] && minOrders[sosmed][type]) {
+                const minOrder = minOrders[sosmed][type];
+                minOrderInfo.textContent = `Minimal pemesanan: ${minOrder.toLocaleString()}`;
+            } else {
+                minOrderInfo.textContent = '';
+            }
+        }
 
         // Hitung harga saat jumlah berubah
         jumlahInput.addEventListener('input', calculatePrice);
-        typeSelect.addEventListener('change', calculatePrice);
 
         function calculatePrice() {
             const sosmed = sosmedSelect.value;
@@ -770,6 +791,13 @@
             // Validasi metode pembayaran
             if (!paymentMethod) {
                 alert('Silakan pilih metode pembayaran');
+                return;
+            }
+            
+            // Validasi minimal order
+            const minOrder = minOrders[sosmed] && minOrders[sosmed][type] ? minOrders[sosmed][type] : 0;
+            if (parseInt(jumlah) < minOrder) {
+                alert(`Minimal pemesanan untuk layanan ini adalah ${minOrder.toLocaleString()}`);
                 return;
             }
             
